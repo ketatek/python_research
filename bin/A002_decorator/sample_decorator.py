@@ -6,7 +6,7 @@
 #-------------------------------------------
 
 import functools
-from typing import Callable, TypeVar
+from typing import Callable, TypeVar, Union
 from argparse import FileType, ArgumentParser
 
 _T = TypeVar("_T")
@@ -16,23 +16,32 @@ class DecoSample():
     parser = ArgumentParser()
 
     @classmethod
-    def get_arg_name(name: str, is_option: bool) -> str:
-        return name if is_option else f'--{name}'
+    def get_arg_name(cls, name: str, is_option: bool) -> str:
+        return name if not is_option else f'--{name}'
     
     @classmethod
     def sample_deco(
-        type: Callable[[str], _T] | FileType,
-        help: str,
-        is_option: bool=True 
-    ):  
+        cls,
+        type: Union[Callable[[str], _T] , FileType] = ...,
+        help: str = ...,
+        is_optional: bool=False,
+    ):
+        """_summary_
+
+        Args:
+            type (Union[Callable[[str], _T] , FileType]): _description_
+            help (str): _description_
+            is_option (bool, optional): _description_. Defaults to False.
+        """      
 
         def _sample_deco(func):
-
+            
             # パラメタの追加
             DecoSample.parser.add_argument(
-                DecoSample.get_arg_name(func.__name__), 
+                DecoSample.get_arg_name(func.__name__, is_optional), 
                 type=type, 
-                help=help
+                help=help,
+#                required=required
             )
 
             @functools.wraps(func)
