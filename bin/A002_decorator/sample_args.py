@@ -24,7 +24,7 @@ class ArgsSample(DecoSample):
         , help='サンプルパラメタA'
     )
     def param_a(self) -> str:
-        return self.__params.param_a 
+        return self.args.param_a 
 
     def __init__(self) -> None:
 

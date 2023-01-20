@@ -7,13 +7,36 @@
 
 import functools
 from typing import Callable, TypeVar, Union
-from argparse import FileType, ArgumentParser
+from argparse import FileType, ArgumentParser, HelpFormatter
+from abc import ABCMeta, abstractmethod
 
 _T = TypeVar("_T")
 
-class DecoSample():
+class DecoSample(metaclass=ABCMeta):
 
-    parser = ArgumentParser()
+    __arg_configs = []
+
+    def __init__(
+        self,
+    ) -> None:
+        """
+        インスタンスの初期化
+        """
+
+        self.__argParser = self._setup_perser()
+
+        
+        self.__args = self.parse()
+
+    def _setup_perser(self) -> ArgumentParser:
+          return ArgumentParser()  
+
+    def _parse(self) -> dict:
+          return __class__.__argParser.parse_args()  
+
+    @property
+    def args(self) -> dict:
+        return self.__args 
 
     @classmethod
     def get_arg_name(cls, name: str, is_option: bool) -> str:
