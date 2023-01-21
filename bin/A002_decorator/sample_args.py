@@ -28,14 +28,13 @@ class ArgsSample(DecoSample):
 
     def __init__(self) -> None:
 
+        super().__init__()
+
         #---------------------------------------------
         # parse_args の 前での実行ヘルプの内容を編集可能か検証
         # 編集可能だった。
         # > ということはスーパークラス側で、ArgumentParser の
         # > インスタンス保持しても問題なさそう。
         #---------------------------------------------
-        super().parser.prog = 'foo_bar_プログラム名'
-
-        # パラメタをパース
-        self.__params = super().parser.parse_args()
+        self.__argParser.prog = 'foo_bar_プログラム名'
 
