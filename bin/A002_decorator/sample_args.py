@@ -15,6 +15,7 @@
 #-------------------------------------------
 
 from  sample_decorator import DecoSample
+from argparse import ArgumentParser
 
 class ArgsSample(DecoSample):
 
@@ -26,15 +27,12 @@ class ArgsSample(DecoSample):
     def param_a(self) -> str:
         return self.args.param_a 
 
+    # def _setup_perser(self) -> ArgumentParser:
+    #     return ArgumentParser(
+    #         prog="test_01_プログラム名"
+    #     )
+
     def __init__(self) -> None:
+        super(ArgsSample, self).__init__()
 
-        super().__init__()
-
-        #---------------------------------------------
-        # parse_args の 前での実行ヘルプの内容を編集可能か検証
-        # 編集可能だった。
-        # > ということはスーパークラス側で、ArgumentParser の
-        # > インスタンス保持しても問題なさそう。
-        #---------------------------------------------
-        self.__argParser.prog = 'foo_bar_プログラム名'
 

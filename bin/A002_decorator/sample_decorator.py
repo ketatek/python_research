@@ -23,15 +23,10 @@ class DecoSample(metaclass=ABCMeta):
         """
         インスタンスの初期化
         """
-
-        # ArgumentParser の生成
-        self.__argParser = self._setup_perser()
-
         for arg_item in type(self).__arg_configs:
             
-            print(arg_item)
             # パラメタの追加
-            self.__argParser.add_argument(
+            self._parser.add_argument(
                 arg_item["name"], 
                 type=arg_item["type"], 
                 help=arg_item["help"],
@@ -45,11 +40,18 @@ class DecoSample(metaclass=ABCMeta):
         return ArgumentParser()  
 
     def _parse(self) -> dict:
-        return self.__argParser.parse_args()  
+        return self._parser.parse_args()  
+
+    @property
+    def _parser(self) -> ArgumentParser:
+        if not hasattr(self, "_DecoSample__argParser"):
+           self.__argParser = self._setup_perser()
+
+        return self.__argParser
 
     @property
     def args(self) -> dict:
-        return MappingProxyType(self.__args) 
+        return self.__args 
 
     @classmethod
     def get_arg_name(cls, name: str, is_option: bool) -> str:
