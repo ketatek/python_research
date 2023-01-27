@@ -5,7 +5,7 @@ from logging import(
     getLogger
     , StreamHandler
     , Formatter
-    , INFO
+    , INFO, DEBUG
 )
 
 import json, logging.config
@@ -16,23 +16,24 @@ def create_logger_001():
     logger.setLevel(INFO)
 
     formatter = Formatter(  
-        '%(created)f:%(levelname)s:%(name)s:%(module)s:%(message)s'
+        fmt='%(asctime)s > [%(levelname)s] %(module)s > %(message)s'
     )
 
     handler = StreamHandler(sys.stderr)
-    handler.setLevel(INFO)
+    handler.setLevel(DEBUG)
     handler.setFormatter(formatter)
     
     logger.addHandler(handler)
 
     return logger
 
-def create_logger_001():
+def create_logger_002():
 
-    with open('log-config.json', 'rt') as f:
+    with open('logging.json', 'rt') as f:
         config = json.load(f)
         logging.config.dictConfig(config)
     
     logger = getLogger(__name__)
 
     return logger
+

@@ -1,0 +1,21 @@
+{
+	"version": 1,
+	"root": {
+		"level": "DEBUG",
+		"handlers": ["console"]
+	},
+	"handlers": {
+		"console": {
+			"class": "logging.StreamHandler",
+			"level": "DEBUG",
+			"formatter": "default"
+		}
+	},
+	"formatters": {
+		"default": {
+			"class": "logging.Formatter",
+			"format": "%(asctime)s %(name)-15s %(levelname)-13s %(message)s",
+			"datefmt": "%Y-%m-%d %H:%M:%S"
+		}
+	}
+}
