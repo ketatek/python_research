@@ -12,7 +12,7 @@ import json, logging.config
 
 def create_logger_001():
 
-    logger = getLogger(__name__)
+    logger = getLogger(f"{__name__}_001")
     logger.setLevel(INFO)
 
     formatter = Formatter(  
@@ -33,7 +33,7 @@ def create_logger_002():
         config = json.load(f)
         logging.config.dictConfig(config)
     
-    logger = getLogger(__name__)
+    logger = getLogger(f"{__name__}_002")
 
     return logger
 
