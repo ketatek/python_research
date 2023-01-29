@@ -4,8 +4,40 @@
 		"level": "DEBUG",
 		"handlers": ["console"]
 	},
+	"loggers": {
+		"exec": {
+			"level": "INFO",
+			"handlers": [
+				"trace_log"
+			] 
+		},    
+		"trace": {
+			"level": "DEBUG",
+			"handlers": [
+				"h2"
+			]
+		},
+		"error": {
+			"handlers": [
+				"h2"
+			],  
+			"level": "ERROR",
+			"qualname": "sample",
+			"propagate": "no"
+		}   
+	},  
 	"handlers": {
-		"console": {
+		"exec_log": {
+			"class": "logging.StreamHandler",
+			"level": "DEBUG",
+			"formatter": "default"
+		}
+		, "trace_log": {
+			"class": "logging.StreamHandler",
+			"level": "DEBUG",
+			"formatter": "default"
+		}
+		, "error_log": {
 			"class": "logging.StreamHandler",
 			"level": "DEBUG",
 			"formatter": "default"
