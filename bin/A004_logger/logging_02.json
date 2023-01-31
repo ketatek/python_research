@@ -1,0 +1,35 @@
+{
+	"version": 1,
+	"root": {
+		"level": "DEBUG"
+	},
+	"loggers": {
+		"research_log_02": {
+			"level": "DEBUG",
+			"handlers": [
+				"h1"
+				, "h2"
+			] 
+		}
+	},  
+	"handlers": {
+		"h1": {
+			"class": "logging.StreamHandler",
+			"level": "INFO",
+			"formatter": "default"
+		}
+		, "h2": {
+			"class": "logging.FileHandler",
+			"level": "DEBUG",
+			"filename":"rlog_02_102.log",
+			"formatter": "default"
+		}
+	},
+	"formatters": {
+		"default": {
+			"class": "logging.Formatter",
+			"format": "%(asctime)s %(name)-15s %(levelname)-13s %(message)s",
+			"datefmt": "%Y-%m-%d %H:%M:%S"
+		}
+	}
+}
